@@ -6,8 +6,8 @@ public class Abuela extends Jugador {
     private int daño=100;
     private int defensa=2;
 
-    public Abuela(String nombre, int vida, UniVS ownedByUniVS, Equipo equipo, Batalla batalla, Puntaje puntaje, Dado dado, String lentes) {
-        super(nombre, 100, vida, 2, ownedByUniVS, equipo, batalla, puntaje, dado);
+    public Abuela(String nombre,String id, int vida, UniVS ownedByUniVS, Equipo equipo, Batalla batalla, Puntaje puntaje, Dado dado, String lentes) {
+        super(nombre,id, 100, vida, 2, ownedByUniVS, equipo, batalla, puntaje, dado);
         if (lentes.isBlank()) {
             throw new IllegalArgumentException("Los lentes no pueden estar vacios");
         }
@@ -42,5 +42,5 @@ public class Abuela extends Jugador {
     public String toString() {
         return "Abuela \n lentes" + lentes + "\n daño:" + daño + "\n defensa:" + defensa;
     }
-    
+       
 }

@@ -1,32 +1,35 @@
 package co.edu.uniquindio.poo.model;
 
+import java.util.Optional;
+
 public abstract class Jugador implements Atacable, Curable, Defendible {
 
     private String nombre;
+    private String id;
     private int daño;
     private int vida;
     private int defensa;
     private UniVS ownedByUniVS;
     private Equipo equipo;
     private Batalla batalla;
-    private Puntaje puntaje;
+    private Puntaje listaPuntajes;
     private Dado dado;
 
-    public Jugador(String nombre, int daño, int vida, int defensa, UniVS ownedByUniVS, Equipo equipo,
-            Batalla batalla, Puntaje puntaje, Dado dado) {
+    public Jugador(String nombre, String id, int daño, int vida, int defensa, UniVS ownedByUniVS, Equipo equipo, Batalla batalla, Puntaje listaPuntajes, Dado dado) {
 
-        if(nombre.isBlank()&& daño<0 && vida<0 && defensa<0){
+        if(nombre.isBlank()&& id.isBlank() && daño<0 && vida<0 && defensa<0){
             throw new IllegalArgumentException("Los valores ingresados no son validos");
         }
 
         this.nombre = nombre;
+        this.id = id;
         this.daño = daño;
         this.vida = vida;
         this.defensa = defensa;
         this.ownedByUniVS = ownedByUniVS;
         this.equipo = equipo;
         this.batalla = batalla;
-        this.puntaje = puntaje;
+        this.listaPuntajes = listaPuntajes;
         this.dado = dado;
     }
 
@@ -36,6 +39,14 @@ public abstract class Jugador implements Atacable, Curable, Defendible {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getDaño() {
@@ -86,12 +97,12 @@ public abstract class Jugador implements Atacable, Curable, Defendible {
         this.batalla = batalla;
     }
 
-    public Puntaje getPuntaje() {
-        return puntaje;
+    public Puntaje getListaPuntajes() {
+        return listaPuntajes;
     }
 
     public void setPuntaje(Puntaje puntaje) {
-        this.puntaje = puntaje;
+        this.listaPuntajes = listaPuntajes;
     }
 
     public Dado getDado() {
@@ -104,7 +115,8 @@ public abstract class Jugador implements Atacable, Curable, Defendible {
 
     @Override
     public String toString() {
-        return "Jugador \n nombre " + nombre + "\n daño=" + daño + "\n vida=" + vida + "\n defensa=" + defensa;
+        return "Jugador \n nombre " + nombre + "id"+ id + "\n daño=" + daño + "\n vida=" + vida + "\n defensa=" + defensa;
     }
 
 }
+  
