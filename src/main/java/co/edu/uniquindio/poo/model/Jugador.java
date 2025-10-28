@@ -119,3 +119,4 @@ public abstract class Jugador implements Atacable, Curable, Defendible {
     }
 
 }
+  
