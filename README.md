@@ -4,8 +4,9 @@ Descripciín basisca de su Proyecto de POO ...
 
 # Autores
 
-- Autor 1
-- Autor 2
+- Nicolás Arango Gutierrez
+- Yulian Stiven
+- Briyith Sanchez Alonso
 
 # Herramientas
 
@@ -14,28 +15,3 @@ Descripciín basisca de su Proyecto de POO ...
 - [maven](https://maven.apache.org)
 
 
-# Construcción y pruebas
-
-Para compilar el proyecto puede usar el comando:
-
-```shell
-mvn clean compile
-```
-
-Para ejecutar las pruebas puede usar el comando: 
-
-```shell
- mvn clean test
-```
-
-Para generar el jar puede usar el comando: 
-
-```shell
- mvn clean package
-```
-
-y para ejecutar el jar
-
-```shell
- java -jar target/Videojuego-1.0.jar
-```
