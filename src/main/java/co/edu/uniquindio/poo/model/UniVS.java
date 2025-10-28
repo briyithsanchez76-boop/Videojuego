@@ -1,4 +1,8 @@
 package co.edu.uniquindio.poo.model;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.Optional;
+
 
 public class UniVS {
 
@@ -56,5 +60,47 @@ public class UniVS {
     public void setListaDados(Dado listaDados) {
         this.listaDados = listaDados;
     }
+
+    
+     /**
+     * metodo para agregar un jugador a UniVS
+     */
+
+     public String agregarJugador(Jugador nuevoJugador){
+        String mensaje=" ";
+        Optional <Jugador> jugadorExistente=buscarJugador(nuevoJugador.getId());
+        if(jugadorExistente.isPresent()){
+            mensaje="jugador con id" + nuevoJugador.getId() +"ya existe";
+
+     }else{
+        listaJugadores.add(nuevoJugador);
+        mensaje="jugador con id" + nuevoJugador.getId()+ "fue agregado exitosamente";
+     }
+        return mensaje;
+        }
+
+    /**
+     * metodo para buscar un jugador en UniVS
+     */
+
+     public Optional buscarJugador(String id){
+        return listaJugadores.stream().filter(jugador -> Jugador.getId().equals(id)).findFirst();
+     }
+
+    /**
+     * metodo para eliminar un jugador en UniVS
+     */
+
+     public String eliminarJugador(String id){
+        String mensaje=" ";
+        Optional<Jugador> jugadorExistente=buscarJugador(id);
+        if(jugadorExistente.isPresent()){
+            listaJugadores.remove(jugadorExistente.get());
+            mensaje="Client with id:" + id + "was removed successfully";
+        }else{
+            mensaje="Client with id:" + id + "doesn't exist";
+        }
+        return mensaje;
+     }
 
 }

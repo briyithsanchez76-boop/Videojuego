@@ -6,8 +6,8 @@ public class Kratos extends Jugador {
     private int daño=60;
     private int defensa=70;
 
-    public Kratos(String nombre, int vida, UniVS ownedByUniVS, Equipo equipo, Batalla batalla, Puntaje puntaje, Dado dado, String cabezaMedusa) {
-        super(nombre, 60, vida, 70, ownedByUniVS, equipo, batalla, puntaje, dado);
+    public Kratos(String nombre, string id ,int vida, UniVS ownedByUniVS, Equipo equipo, Batalla batalla, Puntaje puntaje, Dado dado, String cabezaMedusa) {
+        super(nombre, id, 60, vida, 70, ownedByUniVS, equipo, batalla, puntaje, dado);
         if (cabezaMedusa.isBlank()) {
             throw new IllegalArgumentException("La cabeza de medusa no puede estar vacia");
         }
