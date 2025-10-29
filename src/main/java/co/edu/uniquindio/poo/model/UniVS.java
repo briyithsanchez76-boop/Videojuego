@@ -6,62 +6,62 @@ import java.util.Optional;
 
 public class UniVS {
 
-    private Puntaje listaPuntajes;
-    private Batalla listaBatallas;
-    private Jugador listaJugadores;
-    private Equipo listaEquipos;
-    private Dado listaDados;
+    private List<Puntaje> listaPuntajes;
+    private List<Batalla> listaBatallas;
+    private List<Jugador> listaJugadores;
+    private List<Equipo> listaEquipos;
+    private List<Dado> listaDados;
 
-    public UniVS(Puntaje listaPuntajes, Batalla listaBatallas, Jugador listaJugadores, Equipo listaEquipos,
-            Dado listaDados) {
-        this.listaPuntajes = listaPuntajes;
-        this.listaBatallas = listaBatallas;
-        this.listaJugadores = listaJugadores;
-        this.listaEquipos = listaEquipos;
-        this.listaDados = listaDados;
-    }
-
-    public Puntaje getListaPuntajes() {
-        return listaPuntajes;
-    }
-
-    public void setListaPuntajes(Puntaje listaPuntajes) {
-        this.listaPuntajes = listaPuntajes;
-    }
-
-    public Batalla getListaBatallas() {
-        return listaBatallas;
-    }
-
-    public void setListaBatallas(Batalla listaBatallas) {
-        this.listaBatallas = listaBatallas;
-    }
-
-    public Jugador getListaJugadores() {
-        return listaJugadores;
-    }
-
-    public void setListaJugadores(Jugador listaJugadores) {
-        this.listaJugadores = listaJugadores;
-    }
-
-    public Equipo getListaEquipos() {
-        return listaEquipos;
-    }
-
-    public void setListaEquipos(Equipo listaEquipos) {
-        this.listaEquipos = listaEquipos;
-    }
-
-    public Dado getListaDados() {
-        return listaDados;
-    }
-
-    public void setListaDados(Dado listaDados) {
-        this.listaDados = listaDados;
-    }
-
+        public UniVS( List<Puntaje> listaPuntajes, List<Batalla> listaBatallas, List<Jugador> listaJugadores, List<Equipo> listaEquipos, List<Dado> listaDados) {
+            this.listaPuntajes = listaPuntajes;
+            this.listaBatallas = listaBatallas;
+            this.listaJugadores = listaJugadores;
+            this.listaEquipos = listaEquipos;
+            this.listaDados = listaDados;
+        }
     
+     public List<Puntaje> getListaPuntajes() {
+            return listaPuntajes;
+        }
+
+        public void setListaPuntajes(List<Puntaje> listaPuntajes) {
+            this.listaPuntajes = listaPuntajes;
+        }
+
+        public List<Batalla> getListaBatallas() {
+            return listaBatallas;
+        }
+
+        public void setListaBatallas(List<Batalla> listaBatallas) {
+            this.listaBatallas = listaBatallas;
+        }
+
+        public List<Jugador> getListaJugadores() {
+            return listaJugadores;
+        }
+
+        public void setListaJugadores(List<Jugador> listaJugadores) {
+            this.listaJugadores = listaJugadores;
+        }
+
+        public List<Equipo> getListaEquipos() {
+            return listaEquipos;
+        }
+
+        public void setListaEquipos(List<Equipo> listaEquipos) {
+            this.listaEquipos = listaEquipos;
+        }
+
+        public List<Dado> getListaDados() {
+            return listaDados;
+        }
+
+        public void setListaDados(List<Dado> listaDados) {
+            this.listaDados = listaDados;
+        }
+
+
+
      /**
      * metodo para agregar un jugador a UniVS
      */
