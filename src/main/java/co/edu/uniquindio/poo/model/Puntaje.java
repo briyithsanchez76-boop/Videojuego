@@ -54,6 +54,11 @@ public class Puntaje{
         return "Puntaje puntaje" + puntaje ;
     }
     
-
+    public void mostrarPuntaje() {
+        System.out.println("   Tabla de Puntaje ");
+        System.out.println("Puntaje: " + puntaje);
+        System.out.println("Jugador: " + jugador.toString());
+        System.out.println("Equipo: " + equipo.toString());
+    }
     
 }
