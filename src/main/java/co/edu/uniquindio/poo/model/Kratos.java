@@ -54,36 +54,8 @@ public class Kratos extends Jugador {
         return "Kratos \n cabezaMedusa" + cabezaMedusa + "\n daño:" + daño + "\n defensa:" + defensa;
     }
 
-      public void atacar(Jugador enemigo){
-        int daño1=daño - enemigo.getDefensa();
-        enemigo.recibirDaño(daño1);
-        System.out.println(nombre + " atacó a " + enemigo.getNombre() + " causando " + daño1 + " de daño ");
-    }
-
-    public void recibirDaño(int dañoRecibido){
-        int daño= dañoRecibido - defensa;
-        if (daño<0){
-            daño=0;
-        }
-        vida=vida-dañoRecibido;
-        if(vida<0){
-            vida=0;
-        }
-
-        System.out.println(nombre + " recibió " + daño + " de daño. \n la vida restante del jugador es: " + vida );
-    }
-
-    public void activarFuria(){
-        if(!modoFuria){
-            modoFuria=true;
-            daño+=20;
-            defensa+=10;
-            System.out.println(nombre + " Kratos está en modo furia su ataque y defensa aumentarán temporalmente");
-        }
-    }
-
-    // Métodos adicionales implementando las interfaces
-    public void atacar(Jugador enemigo){
+    @Override
+    public void atacar(Jugador enemigo) {
         System.out.println(nombre + " ataca con las Espadas del Caos!");
         int dañoTotal = daño;
         if(modoFuria) {
@@ -96,7 +68,26 @@ public class Kratos extends Jugador {
         System.out.println(nombre + " causó " + dañoFinal + " de daño a " + enemigo.getNombre());
     }
 
-    public void defender(){
+    @Override
+    public void recibirDaño(int dañoRecibido) {
+        int dañoFinal = dañoRecibido - defensa;
+        if(dañoFinal < 0) dañoFinal = 0;
+        vida -= dañoFinal;
+        if(vida < 0) vida = 0;
+        System.out.println(nombre + " recibió " + dañoFinal + " de daño. Vida restante: " + vida);
+    }
+
+    public void activarFuria() {
+        if(!modoFuria) {
+            modoFuria = true;
+            daño += 20;
+            defensa += 10;
+            System.out.println(nombre + " está en modo furia. ¡Su ataque y defensa aumentarán temporalmente!");
+        }
+    }
+
+    @Override
+    public void defender() {
         System.out.println(nombre + " se defiende con el Escudo del Guardián!");
         int defensaExtra = 15;
         if(modoFuria) {

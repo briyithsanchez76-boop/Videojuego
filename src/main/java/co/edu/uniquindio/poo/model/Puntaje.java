@@ -2,35 +2,20 @@ package co.edu.uniquindio.poo.model;
 
 public class Puntaje{
 
-    private int puntaje;
-    private Jugador jugador;
+    private String equipo1;
+    private String equipo2;
+    private String resultado;
     private UniVS ownedByUniVS;
-    private Equipo equipo;
 
-    public Puntaje(int puntaje, Jugador jugador, UniVS ownedByUniVS, Equipo equipo) {
-        if(puntaje<0){
-            throw new IllegalArgumentException(" los datos son invalidos");
+    public Puntaje(String equipo1, String equipo2, String resultado) {
+        if(equipo1 == null || equipo1.isBlank() || 
+           equipo2 == null || equipo2.isBlank() || 
+           resultado == null || resultado.isBlank()){
+            throw new IllegalArgumentException("Los datos son inválidos");
         }
-        this.puntaje = puntaje;
-        this.jugador = jugador;
-        this.ownedByUniVS = ownedByUniVS;
-        this.equipo = equipo;
-    }
-
-    public int getPuntaje() {
-        return puntaje;
-    }
-
-    public void setPuntaje(int puntaje) {
-        this.puntaje = puntaje;
-    }
-
-    public Jugador getJugador() {
-        return jugador;
-    }
-
-    public void setJugador(Jugador jugador) {
-        this.jugador = jugador;
+        this.equipo1 = equipo1;
+        this.equipo2 = equipo2;
+        this.resultado = resultado;
     }
 
     public UniVS getOwnedByUniVS() {
@@ -41,34 +26,27 @@ public class Puntaje{
         this.ownedByUniVS = ownedByUniVS;
     }
 
-    public Equipo getEquipo() {
-        return equipo;
-    }
-
-    public void setEquipo(Equipo equipo) {
-        this.equipo = equipo;
-    }
-
     @Override
     public String toString() {
-        return "Puntaje puntaje" + puntaje ;
+        return equipo1 + " vs " + equipo2 + ": " + resultado;
     }
     
     public void mostrarPuntaje() {
-        System.out.println("   Tabla de Puntaje ");
-        System.out.println("Puntaje: " + puntaje);
-        System.out.println("Jugador: " + jugador.toString());
-        System.out.println("Equipo: " + equipo.toString());
+        System.out.println("=== Resultado de Batalla ===");
+        System.out.println(equipo1 + " vs " + equipo2);
+        System.out.println("Resultado: " + resultado);
+        System.out.println("========================");
     }
 
-    public void disminuirPuntaje(int puntos){
-        puntaje = puntaje-puntos;
-        if(puntaje<0){
-            puntaje=0;
-        }
+    public String getEquipo1() {
+        return equipo1;
     }
-     public void aumentarPuntaje(int puntos){
-        puntaje = puntaje+puntos;
-        
+
+    public String getEquipo2() {
+        return equipo2;
+    }
+
+    public String getResultado() {
+        return resultado;
     }
 }

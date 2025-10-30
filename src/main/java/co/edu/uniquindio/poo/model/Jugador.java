@@ -102,7 +102,7 @@ public abstract class Jugador implements Atacable, Curable, Defendible {
     }
 
     public void setPuntaje(List<Puntaje> puntaje) {
-        this.listaPuntajes = listaPuntajes;
+        this.listaPuntajes = puntaje;
     }
 
     public Dado getDado() {
@@ -113,9 +113,18 @@ public abstract class Jugador implements Atacable, Curable, Defendible {
         this.dado = dado;
     }
 
+    public int getAtaque() {
+        return daño;
+    }
+
     @Override
     public String toString() {
-        return "Jugador \n nombre " + nombre + "id"+ id + "\n daño=" + daño + "\n vida=" + vida + "\n defensa=" + defensa;
+        return "Jugador \n nombre " + nombre + " id: "+ id + "\n daño=" + daño + "\n vida=" + vida + "\n defensa=" + defensa;
+    }
+
+    public int atacar() {
+        int valorDado = dado.lanzarDado();
+        return daño + valorDado;
     }
 
     public abstract void recibirDaño(int daño);

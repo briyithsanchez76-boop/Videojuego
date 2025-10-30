@@ -82,8 +82,8 @@ public class UniVS {
      * metodo para buscar un jugador en UniVS
      */
 
-     public Optional buscarJugador(String id){
-        return listaJugadores.stream().filter(jugador -> Jugador.getId().equals(id)).findFirst();
+     public Optional<Jugador> buscarJugador(String id){
+        return listaJugadores.stream().filter(jugador -> jugador.getId().equals(id)).findFirst();
      }
 
     /**
@@ -144,10 +144,12 @@ public class UniVS {
 
     //metodo para iniciar una batalla
     public String iniciarBatalla(String idBatalla){
-
-        String mensaje=" ";
-        batalla.crearBatalla(idBatalla);
-        LinkedList<Equipo> equiposBatalla = batalla.getEquipos();
+        Optional<Batalla> batallaBuscada = buscarBatalla(idBatalla);
+        if (!batallaBuscada.isPresent()) {
+            return "No se encontró la batalla con id: " + idBatalla;
+        }
+        Batalla batalla = batallaBuscada.get();
+        List<Equipo> equiposBatalla = batalla.getListaEquipos();
         if (equiposBatalla == null || equiposBatalla.size() < 2) {
             String mensaje = "La batalla debe tener al menos 2 equipos para iniciarse.";
             System.out.println(mensaje);
@@ -172,17 +174,15 @@ public class UniVS {
         salida.add(line);
 
         // Lanzamiento de dados por el equipo atacante
-        dado.crearDado();
-        int valorDado = 0;
-        valorDado = dado.lanzarDado();
+        int valorDado = dado.lanzarDado();
         line = "El equipo " + atacante.getNombre() + " lanza los dados y obtiene: " + valorDado;
         System.out.println(line);
         salida.add(line);
 
         // Cada jugador atacante realiza un ataque sobre un jugador vivo del equipo defensor
-        for (Jugador jugadorAtacante : atacante.getJugadores()) {
+        for (Jugador jugadorAtacante : atacante.getListaJugadores()) {
             // listar objetivos vivos del defensor
-            List<Jugador> objetivosVivos = defensor.getJugadores().stream()
+            List<Jugador> objetivosVivos = defensor.getListaJugadores().stream()
                 .filter(j -> j.getVida() > 0)
                 .collect(Collectors.toList());
 
@@ -197,17 +197,12 @@ public class UniVS {
             int idx = (int)(Math.random() * objetivosVivos.size());
             Jugador objetivo = objetivosVivos.get(idx);
 
-            // calcular daño: aquí usamos el valor del dado (ajusta si quieres usar ataque del jugador)
-            int danio = jugadorAtacante.atacar();
-
-            // actualizar vida del objetivo
-            int vidaAntes = objetivo.getVida();
-            int vidaDespues = Math.max(0, vidaAntes - danio);
-            objetivo.setVida(vidaDespues);
+            // El jugador atacante ataca al objetivo
+            jugadorAtacante.atacar(objetivo);
 
             line = "Jugador " + jugadorAtacante.getNombre()
                    + " ataca a " + objetivo.getNombre()
-                   + " causando " + danio + " puntos. Vida: " + vidaAntes + " -> " + vidaDespues;
+                   + ". Vida restante: " + objetivo.getVida();
             System.out.println(line);
             salida.add(line);
         }
@@ -216,7 +211,7 @@ public class UniVS {
         line = "Estado final de los jugadores del equipo " + defensor.getNombre() + ":";
         System.out.println(line);
         salida.add(line);
-        for (Jugador j : defensor.getJugadores()) {
+        for (Jugador j : defensor.getListaJugadores()) {
             line = "- " + j.getNombre() + ": vida=" + j.getVida();
             System.out.println(line);
             salida.add(line);
@@ -237,14 +232,16 @@ public class UniVS {
             return mensaje;
         }
 
-        long vivos1 = equipo1.getJugadores().stream().filter(j -> j.getVida() > 0).count();
-        long vivos2 = equipo2.getJugadores().stream().filter(j -> j.getVida() > 0).count();
+        long vivos1 = equipo1.getListaJugadores().stream().filter(j -> j.getVida() > 0).count();
+        long vivos2 = equipo2.getListaJugadores().stream().filter(j -> j.getVida() > 0).count();
 
         String resultado;
         if (vivos1 > 0 && vivos1 > vivos2) {
             resultado = "1-0";
         } else if (vivos2 > 0 && vivos2 > vivos1) {
             resultado = "0-1";
+        } else {
+            resultado = "0-0";
         }
 
         System.out.println("Puntaje final: " + resultado);
@@ -253,14 +250,28 @@ public class UniVS {
     }
 
     public String ganadorBatalla(String idBatalla){
-        String mensaje=" ";
-        String puntaje = definirPuntajeFinal(atacante, defensor);
-        if(puntaje.equals("1-0")){
-            mensaje="El equipo " + atacante.getNombre() + " ha ganado la batalla.";
-        }else if(puntaje.equals("0-1")){
-            mensaje="El equipo " + defensor.getNombre() + " ha ganado la batalla.";
+        Optional<Batalla> batallaBuscada = buscarBatalla(idBatalla);
+        if (!batallaBuscada.isPresent()) {
+            return "No se encontró la batalla con id: " + idBatalla;
         }
-        return mensaje;
+        
+        Batalla batalla = batallaBuscada.get();
+        List<Equipo> equipos = batalla.getListaEquipos();
+        if (equipos == null || equipos.size() < 2) {
+            return "La batalla no tiene suficientes equipos";
+        }
+        
+        Equipo equipo1 = equipos.get(0);
+        Equipo equipo2 = equipos.get(1);
+        String puntaje = definirPuntajeFinal(equipo1, equipo2);
+        
+        if(puntaje.equals("1-0")){
+            return "El equipo " + equipo1.getNombre() + " ha ganado la batalla.";
+        }else if(puntaje.equals("0-1")){
+            return "El equipo " + equipo2.getNombre() + " ha ganado la batalla.";
+        }else{
+            return "La batalla terminó en empate";
+        }
     }
 
     public String infoPersonajes(){
