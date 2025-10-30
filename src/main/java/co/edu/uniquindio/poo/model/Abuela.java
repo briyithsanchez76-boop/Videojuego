@@ -1,7 +1,7 @@
 package co.edu.uniquindio.poo.model;
 
 import java.util.List;
-public class Abuela extends Jugador {
+public class Abuela extends Jugador implements Lanzable {
 
     private String lentes;
     private int daño=100;
@@ -43,5 +43,43 @@ public class Abuela extends Jugador {
     public String toString() {
         return "Abuela \n lentes" + lentes + "\n daño:" + daño + "\n defensa:" + defensa;
     }
+
+       public void defender(){
+        System.out.println(" La abuela " + nombre + " se defendió con la chancla voladora ");
        
+       defensa = defensa + 10;
+       if (defensa>100){
+        defensa=100;
+       }
+       System.out.println(" La defensa de la abuela " + nombre + " ahora es de: " + defensa);
+}
+
+    public void atacar(Jugador enemigo){
+        int daño1=daño - enemigo.getDefensa();
+        enemigo.recibirDaño(daño1);
+        System.out.println(nombre + " atacó a " + enemigo.getNombre() + " causando " + daño1 + " de daño ");
+    }
+
+    public void recibirDaño(int dañoRecibido){
+        int daño= dañoRecibido - defensa;
+        if (daño<0){
+            daño=0;
+        }
+        vida=vida-dañoRecibido;
+        if(vida<0){
+            vida=0;
+        }
+
+        System.out.println(nombre + " recibió " + daño + " de daño. \n la vida restante del jugador es: " + vida );
+    }
+
+    public void curar (){
+        vida+=10;
+        System.out.println(nombre + " la abuela se curó y ahora tiene " + vida + " de vida");
+    }
+
+    public void lanzar (){
+        System.out.println( " La abuela " + nombre + " lanzó su chancla voladora ");
+    }
+
 }
