@@ -2,6 +2,7 @@ package co.edu.uniquindio.poo.model;
 
 import java.util.Optional;
 import java.util.List;
+import java.util.LinkedList;
 public abstract class Jugador implements Atacable, Curable, Defendible {
 
     protected String nombre;
@@ -12,10 +13,10 @@ public abstract class Jugador implements Atacable, Curable, Defendible {
     private UniVS ownedByUniVS;
     private Equipo equipo;
     private Batalla batalla;
-    private List<Puntaje> listaPuntajes;
+    private LinkedList<Puntaje> listaPuntajes;
     private Dado dado;
 
-    public Jugador(String nombre, String id, int daño, int vida, int defensa, UniVS ownedByUniVS, Equipo equipo, Batalla batalla, List<Puntaje> listaPuntajes, Dado dado) {
+    public Jugador(String nombre, String id, int daño, int vida, int defensa, UniVS ownedByUniVS, Equipo equipo, Batalla batalla, Dado dado) {
 
         if(nombre.isBlank()&& id.isBlank() && daño<0 && vida<0 && defensa<0){
             throw new IllegalArgumentException("Los valores ingresados no son validos");
@@ -29,7 +30,7 @@ public abstract class Jugador implements Atacable, Curable, Defendible {
         this.ownedByUniVS = ownedByUniVS;
         this.equipo = equipo;
         this.batalla = batalla;
-        this.listaPuntajes = listaPuntajes;
+        this.listaPuntajes = new LinkedList<>();
         this.dado = dado;
     }
 
@@ -97,12 +98,12 @@ public abstract class Jugador implements Atacable, Curable, Defendible {
         this.batalla = batalla;
     }
 
-    public List<Puntaje> getListaPuntajes() {
+    public LinkedList<Puntaje> getListaPuntajes() {
         return listaPuntajes;
     }
 
-    public void setPuntaje(List<Puntaje> puntaje) {
-        this.listaPuntajes = listaPuntajes;
+    public void setPuntaje(LinkedList<Puntaje> puntaje) {
+        this.listaPuntajes = puntaje;
     }
 
     public Dado getDado() {
@@ -119,5 +120,19 @@ public abstract class Jugador implements Atacable, Curable, Defendible {
     }
 
     public abstract void recibirDaño(int daño);
+    public abstract void curar(int vida);
+    public abstract void defender(int defensa);
+    public abstract void atacar();
+
+    public String estadoVida() {
+       String mensaje="";
+       if (getVida() > 0) {
+           mensaje="El jugador " + nombre + " está vivo con " + getVida() + " puntos de vida.";
+       } else {
+           mensaje="El jugador " + nombre + " ha sido derrotado.";
+        
+       }
+       return mensaje;
+    }
 }
   
