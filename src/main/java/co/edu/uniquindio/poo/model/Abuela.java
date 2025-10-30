@@ -44,7 +44,7 @@ public class Abuela extends Jugador implements Lanzable {
         return "Abuela \n lentes" + lentes + "\n daño:" + daño + "\n defensa:" + defensa;
     }
 
-       public void defender(){
+      public void defender(){
         System.out.println(" La abuela " + nombre + " se defendió con la chancla voladora ");
        
        defensa = defensa + 10;
