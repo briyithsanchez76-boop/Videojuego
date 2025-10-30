@@ -8,7 +8,7 @@ public class Kratos extends Jugador {
     private int daño=60;
     private int defensa=70;
 
-    public Kratos(String nombre, string id ,int vida, UniVS ownedByUniVS, Equipo equipo, Batalla batalla, List<Puntaje> puntaje, Dado dado, String cabezaMedusa, boolean modoFuria) {
+    public Kratos(String nombre, String id ,int vida, UniVS ownedByUniVS, Equipo equipo, Batalla batalla, List<Puntaje> puntaje, Dado dado, String cabezaMedusa, boolean modoFuria) {
         super(nombre, id, 60, vida, 70, ownedByUniVS, equipo, batalla, puntaje, dado);
         if (cabezaMedusa.isBlank()) {
             throw new IllegalArgumentException("La cabeza de medusa no puede estar vacia");
@@ -73,31 +73,6 @@ public class Kratos extends Jugador {
         System.out.println(nombre + " recibió " + daño + " de daño. \n la vida restante del jugador es: " + vida );
     }
 
-    public void defender(){
-        System.out.println(nombre + " levantó su espada para defenderse del ataque ");
-        defensa+=15;
-
-        if(defensa>120){
-            defensa=120;
-        }
-
-        System.out.println("la defensa de " + nombre + " ahora es " + defensa);
-
-    }
-
-     public void curar (int cantidad){
-        int curacion= cantidad;
-        if(modoFuria){
-            curacion+=10;
-            System.out.print(nombre + " está en modo furia para sanar más rápido ");
-        }
-        vida+=curacion;
-        if (vida> 100){
-            vida=100;
-        }
-        System.out.println(nombre + " Kratos se curó y ahora tiene " + vida + " de vida");
-    }
-
     public void activarFuria(){
         if(!modoFuria){
             modoFuria=true;
@@ -107,6 +82,41 @@ public class Kratos extends Jugador {
         }
     }
 
-    
-}
+    // Métodos adicionales implementando las interfaces
+    public void atacar(Jugador enemigo){
+        System.out.println(nombre + " ataca con las Espadas del Caos!");
+        int dañoTotal = daño;
+        if(modoFuria) {
+            dañoTotal += 15;
+            System.out.println("¡El modo furia aumenta el daño!");
+        }
+        int dañoFinal = dañoTotal - enemigo.getDefensa();
+        if(dañoFinal < 0) dañoFinal = 0;
+        enemigo.recibirDaño(dañoFinal);
+        System.out.println(nombre + " causó " + dañoFinal + " de daño a " + enemigo.getNombre());
+    }
 
+    public void defender(){
+        System.out.println(nombre + " se defiende con el Escudo del Guardián!");
+        int defensaExtra = 15;
+        if(modoFuria) {
+            defensaExtra += 5;
+            System.out.println("¡El modo furia aumenta la defensa!");
+        }
+        defensa += defensaExtra;
+        if(defensa > 100) defensa = 100;
+        System.out.println("La defensa de " + nombre + " aumentó a " + defensa);
+    }
+
+    public void curar(){
+        System.out.println(nombre + " se está curando");
+        int curacionBase = 15;
+        if(modoFuria) {
+            curacionBase += 10;
+            System.out.println("El modo furia aumenta la curación");
+        }
+        vida += curacionBase;
+        if(vida > 100) vida = 100;
+        System.out.println(nombre + " se ha curado. Vida actual: " + vida);
+    }
+}
