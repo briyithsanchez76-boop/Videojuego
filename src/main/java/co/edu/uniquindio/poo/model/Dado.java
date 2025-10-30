@@ -4,7 +4,7 @@ public class Dado {
     private int caras;
     private int valorDado;
 
-    public Dado() {
+    public Dado(int caras, int valorDado) {
         if (valorDado<=0) {
             throw new IllegalArgumentException("El valor del dado debe ser mayor que cero");
         }
