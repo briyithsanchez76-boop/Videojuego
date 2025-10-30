@@ -1,7 +1,7 @@
 package co.edu.uniquindio.poo.model;
 
 
-public class ChapulinColorado extends Jugador implements Atacable, Defendible {
+public class ChapulinColorado extends Jugador {
 
     private String antenitasDeVinil;
 

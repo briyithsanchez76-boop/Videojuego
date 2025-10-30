@@ -10,7 +10,7 @@ private List<Jugador> listaJugadores;
 
 public Batalla(int turno, List<Equipo> listaEquipos, UniVS ownedByUniVS, List<Jugador> listaJugadores) {
     if(turno<0){
-       throw new illegalArgumentException("los datos no pueden ser negativos");
+       throw new IllegalArgumentException("los datos no pueden ser negativos");
     }
     this.turno = turno;
     this.listaEquipos = listaEquipos;
