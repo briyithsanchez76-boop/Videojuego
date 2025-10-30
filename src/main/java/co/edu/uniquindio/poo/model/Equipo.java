@@ -60,4 +60,18 @@ public class Equipo {
         this.batalla = batalla;
     }    
 
+public boolean tieneJugadoresVivos() {
+        if (listaJugadores == null || listaJugadores.isEmpty()) {
+            return false;
+        }
+        
+        // Verifica si hay al menos un jugador con vida mayor a 0
+        for (Jugador jugador : listaJugadores) {
+            if (jugador.getVida() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+   
 }
