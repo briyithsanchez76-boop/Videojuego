@@ -61,7 +61,6 @@ public class UniVS {
         this.dado = dado;
     }
 
-    
      /**
      * metodo para agregar un jugador a UniVS
      */
@@ -115,7 +114,7 @@ public class UniVS {
         }else{
         listaBatallas.add(nuevaBatalla);
         mensaje="batalla con id" + nuevaBatalla.getId() + "ha iniciado exitosamente";
-}
+    }
         return mensaje;
       }
 

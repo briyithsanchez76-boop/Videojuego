@@ -1,21 +1,21 @@
 package co.edu.uniquindio.poo.model;
 
 import java.util.Optional;
-
+import java.util.List;
 public abstract class Jugador implements Atacable, Curable, Defendible {
 
-    private String nombre;
-    private String id;
-    private int daño;
-    private int vida;
-    private int defensa;
+    protected String nombre;
+    protected String id;
+    protected int daño;
+    protected int vida;
+    protected int defensa;
     private UniVS ownedByUniVS;
     private Equipo equipo;
     private Batalla batalla;
-    private Puntaje listaPuntajes;
+    private List<Puntaje> listaPuntajes;
     private Dado dado;
 
-    public Jugador(String nombre, String id, int daño, int vida, int defensa, UniVS ownedByUniVS, Equipo equipo, Batalla batalla, Puntaje listaPuntajes, Dado dado) {
+    public Jugador(String nombre, String id, int daño, int vida, int defensa, UniVS ownedByUniVS, Equipo equipo, Batalla batalla, List<Puntaje> listaPuntajes, Dado dado) {
 
         if(nombre.isBlank()&& id.isBlank() && daño<0 && vida<0 && defensa<0){
             throw new IllegalArgumentException("Los valores ingresados no son validos");
@@ -97,11 +97,11 @@ public abstract class Jugador implements Atacable, Curable, Defendible {
         this.batalla = batalla;
     }
 
-    public Puntaje getListaPuntajes() {
+    public List<Puntaje> getListaPuntajes() {
         return listaPuntajes;
     }
 
-    public void setPuntaje(Puntaje puntaje) {
+    public void setPuntaje(List<Puntaje> puntaje) {
         this.listaPuntajes = listaPuntajes;
     }
 
@@ -118,4 +118,6 @@ public abstract class Jugador implements Atacable, Curable, Defendible {
         return "Jugador \n nombre " + nombre + "id"+ id + "\n daño=" + daño + "\n vida=" + vida + "\n defensa=" + defensa;
     }
 
+    public abstract void recibirDaño(int daño);
 }
+  
