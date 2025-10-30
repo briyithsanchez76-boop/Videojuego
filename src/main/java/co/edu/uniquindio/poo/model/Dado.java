@@ -18,6 +18,9 @@ public class Dado {
     }
 
     public void setCaras(int caras) {
+        if ( caras <= 0) {
+            throw new illegalArgumentException ( "el valor del dado no puede ser menor o igual a cero" );
+        }
         this.caras = caras;
     }
 
@@ -32,5 +35,7 @@ public class Dado {
     public int lanzarDado() {
         return (int) (Math.random() * caras) + 1;
     }
-
+      public void tirar() {
+        this.valorDado = lanzarDado();
+    }
 }
