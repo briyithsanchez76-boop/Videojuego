@@ -2,14 +2,14 @@ package co.edu.uniquindio.poo.model;
 
 public class Puntaje{
 
-    private String puntaje;
+    private int puntaje;
     private Jugador jugador;
     private UniVS ownedByUniVS;
     private Equipo equipo;
 
-    public Puntaje(String puntaje, Jugador jugador, UniVS ownedByUniVS, Equipo equipo) {
-        if(puntaje.isBlank()){
-            throw new IllegalArgumentException(" los datos son invalidos")
+    public Puntaje(int puntaje, Jugador jugador, UniVS ownedByUniVS, Equipo equipo) {
+        if(puntaje<0){
+            throw new IllegalArgumentException(" los datos son invalidos");
         }
         this.puntaje = puntaje;
         this.jugador = jugador;
@@ -17,11 +17,11 @@ public class Puntaje{
         this.equipo = equipo;
     }
 
-    public String getPuntaje() {
+    public int getPuntaje() {
         return puntaje;
     }
 
-    public void setPuntaje(String puntaje) {
+    public void setPuntaje(int puntaje) {
         this.puntaje = puntaje;
     }
 
@@ -60,5 +60,15 @@ public class Puntaje{
         System.out.println("Jugador: " + jugador.toString());
         System.out.println("Equipo: " + equipo.toString());
     }
-    
+
+    public void disminuirPuntaje(int puntos){
+        puntaje = puntaje-puntos;
+        if(puntaje<0){
+            puntaje=0;
+        }
+    }
+     public void aumentarPuntaje(int puntos){
+        puntaje = puntaje+puntos;
+        
+    }
 }

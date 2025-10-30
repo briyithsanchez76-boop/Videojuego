@@ -42,14 +42,13 @@ public class ChapulinColorado extends Jugador {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
+
         return super.toString();
     }
 
    
 
-
-   
+    
 }
 
 
