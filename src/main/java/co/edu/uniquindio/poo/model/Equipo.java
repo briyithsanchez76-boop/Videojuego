@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.model;
 
 import java.util.List;
+import java.util.LinkedList;
 
 public class Equipo {
     private String nombre;
